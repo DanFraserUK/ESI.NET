@@ -2,10 +2,10 @@
 
 # What is ESI.NET?
 
-**ESI.NET** is a .NET wrapper for the [Eve Online ESI API](https://esi.tech.ccp.is/latest/). This wrapper simplifies the process of integrating ESI into your .NET application.
+**ESI.NET** is a .NET wrapper for the [Eve Online ESI API](https://esi.evetech.net/). This wrapper simplifies the process of integrating ESI into your .NET application.
 
 ### Resources
-* [Discord - E.N](https://discord.gg/gmJMcdz) - This channel is where you can contact me (Psianna Archeia) for questions and where automated webhook notifications will be pushed for github and when builds are completed. (If you have Discord, this is the preferred way to contact me concerning ESI.NET. I **DO NOT** monitor Slack anymore for ESI.NET issues.)
+* [Discord - E.N](https://discord.gg/SvdN39f) - This channel is where you can contact me (Psianna Archeia) for questions and where automated webhook notifications will be pushed for github and when builds are completed. (If you have Discord, this is the preferred way to contact me concerning ESI.NET. I **DO NOT** monitor Slack anymore for ESI.NET issues.)
 * [Tweetfleet - #esi](https://tweetfleet.slack.com/messages/C30KX8UUX/) - This is the official slack channel to speak with CCP devs (and developers) concerning ESI.
 * [ESI Application Keys](https://developers.eveonline.com/)
 * [ESI Swagger Definition](https://esi.tech.ccp.is/swagger.json)
@@ -19,13 +19,13 @@ https://www.nuget.org/packages/ESI.NET
 `dotnet add package ESI.NET `
 
 ## Client Instantiation
-ESI.NET is now Dependency Injection compatible. There are a few parts required to set this up propery in a .NET Standard/Core application:
+ESI.NET is Dependency Injection compatible. There are a few parts required to set this up properly in a .NET Standard/Core application:
 
 ### .NET Standard (Dependency Injection)
 In your appsettings.json, add the following object and fill it in appropriately:
 ```json
 "EsiConfig": {
-    "EsiUrl": "https://esi.tech.ccp.is/",
+    "EsiUrl": "https://esi.evetech.net/",
     "DataSource": "Tranquility",
     "ClientId": "**********",
     "SecretKey": "**********",
@@ -53,7 +53,7 @@ If you are using a .NET Standard-compatible .NET Framework application, you can 
 ```cs
 IOptions<EsiConfig> config = Options.Create(new EsiConfig()
 {
-    EsiUrl = "https://esi.tech.ccp.is/",
+    EsiUrl = "https://esi.evetech.net/",
     DataSource = DataSource.Tranquility,
     ClientId = "**********",
     SecretKey = "**********",
