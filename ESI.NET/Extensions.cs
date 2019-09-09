@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
@@ -8,6 +10,14 @@ namespace ESI.NET
 {
     public static class Extensions
     {
+        public static IServiceCollection AddEsi(this IServiceCollection services, IConfigurationSection section)
+        {
+            services.Configure<EsiConfig>(section);
+            services.AddScoped<IEsiClient, EsiClient>();
+
+            return services;
+        }
+
         public static string ToEsiValue(this Enum e)
         {
             var enums = e.ToString();
@@ -15,9 +25,9 @@ namespace ESI.NET
             {
                 var values = enums.Replace(" ", "").Split(',');
                 var newValues = new List<string>();
-                for (int i = 0; i < values.Length; i++)
-                    newValues.Add(Enum.Parse(e.GetType(), values[i]).GetType().GetTypeInfo().DeclaredMembers.SingleOrDefault(x => x.Name == values[i].ToString())
-                    ?.GetCustomAttribute<EnumMemberAttribute>(true)?.Value);
+                foreach (var item in values)
+                    newValues.Add(Enum.Parse(e.GetType(), item).GetType().GetTypeInfo().DeclaredMembers.SingleOrDefault(x => x.Name == item.ToString())
+                        ?.GetCustomAttribute<EnumMemberAttribute>(true)?.Value);
 
                 return string.Join(",", newValues);
             }
